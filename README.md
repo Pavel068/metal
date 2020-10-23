@@ -1,19 +1,5 @@
-# metal
+# Metal
 
-## Project setup
-```
-npm install
-```
+## Project for Leaders Of Digital
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### ITmb team, Tambov, Russia

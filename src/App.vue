@@ -6,6 +6,7 @@
 					<img src="@/assets/logo.png" alt="">
 					<router-link :to="{name: 'Index'}">Главная</router-link>
 					<router-link :to="{name: 'Graph'}">Графики</router-link>
+					<router-link :to="{name: 'Calculations'}">Рассчеты</router-link>
 					<router-link :to="{name: 'Recommendation'}">Рекомендации</router-link>
 				</div>
 			</div>

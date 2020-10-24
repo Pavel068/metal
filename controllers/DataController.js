@@ -7,3 +7,8 @@ exports.parseDataFile = async (req, res) => {
 		data: ExcelParserInstance.parsePlav()
 	});
 }
+
+exports.solve = async (req, res) => {
+
+	res.status(200).json({});
+}

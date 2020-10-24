@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import Index from "@/views/Index";
 import Graph from "@/views/Graph";
 import Recommendation from "@/views/Recommendation";
+import Calculations from "@/views/Calculations";
 
 Vue.use(VueRouter);
 
@@ -17,6 +18,11 @@ const routes = [
 		path: '/graph',
 		name: 'Graph',
 		component: Graph
+	},
+	{
+		path: '/calculations',
+		name: 'Calculations',
+		component: Calculations
 	},
 	{
 		path: '/recommendation',

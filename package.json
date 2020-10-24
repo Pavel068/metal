@@ -17,13 +17,16 @@
     "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
+    "datejs": "^1.0.0-rc3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
     "morgan": "^1.10.0",
     "vue": "^2.6.12",
     "vue-chartjs": "^3.5.1",
     "vue-router": "^3.2.0",
-    "vue2-daterange-picker": "^0.6.1"
+    "vue2-daterange-picker": "^0.6.1",
+    "xlsx": "^0.16.8"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

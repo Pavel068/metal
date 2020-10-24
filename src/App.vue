@@ -19,16 +19,16 @@
 </template>
 
 <style>
-	.nav img {
-		width: 50px;
-	}
+.nav img {
+	width: 50px;
+}
 
-	.nav a {
-		margin-left: 15px;
-	}
+.nav a {
+	margin-left: 15px;
+}
 
-	.router-link-exact-active {
-		font-weight: bold;
-		text-decoration: underline;
-	}
+.router-link-exact-active {
+	font-weight: bold;
+	text-decoration: underline;
+}
 </style>

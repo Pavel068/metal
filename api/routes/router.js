@@ -14,6 +14,6 @@ router.get('/ping', (req, res) => {
 
 router.post('/upload', FileController.uploadFile);
 
-router.get('/parse', DataController.parseDataFile)
+router.get('/parse', DataController.parseDataFile);
 
 module.exports = router;

@@ -1,8 +1,15 @@
+const fs = require('fs');
 const path = require('path');
 
 exports.uploadFile = async (req, res) => {
 	if (!req.files || Object.keys(req.files).length === 0) {
 		return res.status(400).send('No files were uploaded.');
+	}
+
+	// Clear directory
+	const dir_files = fs.readdirSync(path.resolve(__dirname, '../storage'));
+	for (const file of dir_files) {
+		fs.unlinkSync(path.resolve(__dirname, `../storage/${file}`));
 	}
 
 	if (req.files.files[0]) {

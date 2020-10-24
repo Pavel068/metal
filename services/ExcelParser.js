@@ -5,22 +5,36 @@ const path = require('path');
 class ExcelParser {
 	constructor() {
 		this.worksheet = null;
+		let files = fs.readdirSync(path.resolve(__dirname, '../storage'));
+		this.data_file_name = files[0];
 	}
 
 	parsePlav() {
-		let file = XLSX.readFile(path.resolve(__dirname, '../storage/06b3c2f993636f6c713322ab1882e55c.vnd.openxmlformats-officedocument.spreadsheetml.sheet'));
+		if (this.data_file_name) {
+			try {
+				let file = XLSX.readFile(path.resolve(__dirname, `../storage/${this.data_file_name}`));
 
-		this.worksheet = file.Sheets[file.SheetNames[0]];
+				this.worksheet = file.Sheets[file.SheetNames[0]];
 
-		const result = {
-			name: null,
-			fields: this.getFields(),
-			data: this.parseData()
+				const result = {
+					name: null,
+					fields: this.getFields(),
+					data: this.parseData()
+				}
+
+				result.name = this.worksheet['D1'].v;
+
+				return result;
+			} catch (e) {
+				console.log(e);
+				return null;
+			}
+		} else {
+			return {
+				error: true,
+				message: 'Не загружены данные для анализа!'
+			}
 		}
-
-		result.name = this.worksheet['D1'].v;
-
-		return result;
 	}
 
 	getFields() {

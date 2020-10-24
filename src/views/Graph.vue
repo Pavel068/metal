@@ -2,11 +2,16 @@
 	<div class="charts">
 		<div v-if="loading">Загрузка данных ...</div>
 		<div class="graph_wrapper" v-else>
-			<Scatter :chart-data="chartData" :chart-options="chartOptions" :width="800" :height="450"/>
-			<button class="btn btn-primary" @click="up"> Следующие {{items_show}} </button> &nbsp;
-			<button class="btn btn-primary" :disabled="start_at === 0" @click="down"> Предыдущие {{items_show}} </button> &nbsp;
-			<button class="btn btn-primary" @click="resizeUp"> Увеличить </button> &nbsp;
-			<button class="btn btn-primary" :disabled="items_show === 100" @click="resizeDown"> Уменьшить </button> &nbsp;
+			<div v-if="chart_data && !chart_data.error">
+				<Scatter :chart-data="chartData" :chart-options="chartOptions" :width="800" :height="450"/>
+				<button class="btn btn-primary" @click="up"> Следующие {{items_show}} </button> &nbsp;
+				<button class="btn btn-primary" :disabled="start_at === 0" @click="down"> Предыдущие {{items_show}} </button> &nbsp;
+				<button class="btn btn-primary" @click="resizeUp"> Увеличить </button> &nbsp;
+				<button class="btn btn-primary" :disabled="items_show === 100" @click="resizeDown"> Уменьшить </button> &nbsp;
+			</div>
+			<div v-else>
+				<p class="lead" v-if="chart_data">{{chart_data.message}}</p>
+			</div>
 		</div>
 	</div>
 </template>
@@ -78,39 +83,40 @@ export default {
 			this.drawData();
 		},
 		drawData() {
-			let cd = {
-				datasets: []
-			};
+			if (this.chart_data && !this.chart_data.error) {
+				let cd = {
+					datasets: []
+				};
 
-			[
-				'steel_temp',
-				'steel_weight',
-				'water_expense_1',
-				'water_expense_2',
-				'water_expense_3',
-				'persistence_1',
-				'persistence_2',
-				'persistence_3',
-				'persistence_4',
-				'persistence_5',
-				'persistence_6',
-			].forEach(field => {
-				let color = `rgba(${this.randomInt(0, 255)}, ${this.randomInt(0, 255)}, ${this.randomInt(0, 255)}, 0.8)`;
-				cd.datasets.push({
-					label: this.chart_data.fields[field],
-					fill: false,
-					showLine: true,
-					backgroundColor: color,
-					data: this.chart_data.data.slice(this.start_at, this.end_at).map((item, index) => {
-						return {
-							x: index,
-							y: item[field]
-						}
-					})
+				[
+					'steel_temp',
+					'steel_weight',
+					'water_expense_1',
+					'water_expense_2',
+					'water_expense_3',
+					'persistence_1',
+					'persistence_2',
+					'persistence_3',
+					'persistence_4',
+					'persistence_5',
+					'persistence_6',
+				].forEach(field => {
+					let color = `rgba(${this.randomInt(0, 255)}, ${this.randomInt(0, 255)}, ${this.randomInt(0, 255)}, 0.8)`;
+					cd.datasets.push({
+						label: this.chart_data.fields[field],
+						fill: false,
+						showLine: true,
+						backgroundColor: color,
+						data: this.chart_data.data.slice(this.start_at, this.end_at).map((item, index) => {
+							return {
+								x: index,
+								y: item[field]
+							}
+						})
+					});
 				});
-			});
-
-			this.chartData = cd;
+				this.chartData = cd;
+			}
 		}
 	},
 	async mounted() {
